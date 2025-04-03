@@ -1,0 +1,37 @@
+<odoo>
+    <template id="report_loan_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="loan">
+                <div class="page">
+                    <h2>Borrowing Record</h2>
+                    <p>
+                        <strong>Book:</strong>
+                        <t t-esc="loan.book_id.name" />
+                    </p>
+                    <p>
+                        <strong>Member:</strong>
+                        <t t-esc="loan.member_id.name" />
+                    </p>
+                    <p>
+                        <strong>Date Borrowed:</strong>
+                        <t t-esc="loan.date_borrowed" />
+                    </p>
+                    <p>
+                        <strong>Date Returned:</strong>
+                        <t t-esc="loan.date_returned" />
+                    </p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="action_report_loan"
+        model="library.loan"
+        string="借阅记录"
+        report_type="qweb-pdf"
+        name="library_app.report_loan_document"
+        file="library_app.report_loan_document"
+        print_report_name="'借阅记录 - %s' % (object.book_id.name)"
+    />
+</odoo>

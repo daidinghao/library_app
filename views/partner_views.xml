@@ -1,0 +1,42 @@
+<odoo>
+    <record id="view_form_library_partner" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.library</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="图书馆信息">
+                    <group>
+                        <field name="is_library_member" />
+                        <field name="library_member_id" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_tree_library_partner" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit.library</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="is_library_member" />
+                <field name="library_member_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_library_partner" model="ir.actions.act_window">
+        <field name="name">Library Partners</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_tree_library_partner" />
+    </record>
+
+
+    <menuitem id="menu_library_partner"
+        name="Partners"
+        parent="menu_library_root"
+        action="action_library_partner" />
+</odoo>

@@ -1,0 +1,46 @@
+<odoo>
+  <record id="view_form_library_loan" model="ir.ui.view">
+    <field name="name">library.loan.form</field>
+    <field name="model">library.loan</field>
+    <field name="arch" type="xml">
+      <form string="Loan">
+        <sheet>
+          <field name="book_id" />
+          <field name="member_id" />
+          <field name="date_borrowed" />
+          <field name="date_returned" />
+          <field name="book_author" readonly="1" />
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+  <record id="view_tree_library_loan" model="ir.ui.view">
+    <field name="name">library.loan.tree</field>
+    <field name="model">library.loan</field>
+    <field name="arch" type="xml">
+      <tree string="Loans">
+        <field name="book_id" />
+        <field name="member_id" />
+        <field name="date_borrowed" />
+        <field name="date_returned" />
+      </tree>
+    </field>
+  </record>
+
+
+  <record id="action_library_loan" model="ir.actions.act_window">
+    <field name="name">Loans</field>
+    <field name="res_model">library.loan</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create your first loan
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="menu_library_loan" name="Loans" parent="menu_library_root"
+    action="action_library_loan" />
+</odoo>

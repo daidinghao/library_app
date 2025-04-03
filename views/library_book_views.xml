@@ -1,0 +1,71 @@
+<odoo>
+  <record id="view_form_library_book" model="ir.ui.view">
+    <field name="name">library.book.form</field>
+    <field name="model">library.book</field>
+    <field name="arch" type="xml">
+      <form string="Book">
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="author" />
+            <field name="cover_image" widget="image" class="oe_avatar" />
+          </group>
+          <notebook>
+            <page string="Details">
+              <group>
+                <field name="date_published" />
+                <field name="pages" widget="badge" />
+              </group>
+            </page>
+            <page string="Relations">
+              <group>
+                <field name="loan_ids" readonly="1" />
+                <field name="total_loan_count" readonly="1" />
+                <field name="publisher_ids" widget="many2many_tags" readonly="1" />
+              </group>
+            </page>
+            <page string="Description">
+              <field name="description" />
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+  <record id="view_tree_library_book" model="ir.ui.view">
+    <field name="name">library.book.tree</field>
+    <field name="model">library.book</field>
+    <field name="arch" type="xml">
+      <tree string="Books">
+        <field name="name" />
+        <field name="author" />
+        <field name="date_published" />
+        <field name="total_loan_count" />
+      </tree>
+    </field>
+  </record>
+
+
+  <record id="action_library_book" model="ir.actions.act_window">
+    <field name="name">Books</field>
+    <field name="res_model">library.book</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create your first book
+      </p>
+    </field>
+  </record>
+
+  <menuitem
+    id="menu_library_root"
+    name="Library"
+    sequence="10"
+    web_icon="library_app,static/description/icon.png"
+  />
+
+  <menuitem id="menu_library_book" name="Books" parent="menu_library_root"
+    action="action_library_book" />
+</odoo>
