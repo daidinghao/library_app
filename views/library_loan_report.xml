@@ -28,10 +28,10 @@
     <report
         id="action_report_loan"
         model="library.loan"
-        string="借阅记录"
+        string="Record"
         report_type="qweb-pdf"
         name="library_app.report_loan_document"
         file="library_app.report_loan_document"
-        print_report_name="'借阅记录 - %s' % (object.book_id.name)"
+        print_report_name="'Record - %s' % (object.book_id.name)"
     />
 </odoo>

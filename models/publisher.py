@@ -3,19 +3,13 @@ from odoo.exceptions import UserError, ValidationError
 
 class LibraryPublisher(models.Model):
     _name = 'library.publisher'
-    _description = '出版社'
+    _description = 'Publisher'
     _sql_constraints = [
-        ('name_unique', 'UNIQUE(name)', '出版社名称必须唯一！'),
+        ('name_unique', 'UNIQUE(name)', 'Publisher name must be unique！'),
     ]
 
     name = fields.Char(string="PublisherName", required=True)
-    book_ids = fields.Many2many(
-        'library.book',
-        'library_book_publisher_rel',
-        'publisher_id',
-        'book_id',
-        string="Books"
-    )
+    book_ids = fields.Many2many('library.book', 'library_book_publisher_rel', 'publisher_id', 'book_id', string="Books")
     book_count = fields.Integer(string="Book Count", compute="_compute_book_count", store=True)
 
     @api.depends('book_ids')

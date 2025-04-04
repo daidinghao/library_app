@@ -3,14 +3,14 @@ from odoo.exceptions import UserError, ValidationError
 
 class LibraryBook(models.Model):
     _name = 'library.book'
-    _description = '书'
+    _description = 'Book'
     _order = 'date_published desc'
     _rec_name = 'name'
     _sql_constraints = [
-        ('name_unique', 'UNIQUE(name)', '书名必须唯一！'),
+        ('name_unique', 'UNIQUE(name)', 'Book title must be unique'),
     ]
 
-    name = fields.Char(string="Title", required=True, help="每本书的标题必须唯一")
+    name = fields.Char(string="Title", required=True, help="Book title must be unique")
     author = fields.Char(string="Author")
     description = fields.Text(string="Description")
     cover_image = fields.Binary(string="Images")
@@ -18,13 +18,7 @@ class LibraryBook(models.Model):
     pages = fields.Integer(string="Number of Pages")
     total_loan_count = fields.Integer(string="Total Loan Count", compute="_compute_total_loan_count", store=True)
 
-    publisher_ids = fields.Many2many(
-        'library.publisher',
-        'library_book_publisher_rel',
-        'book_id',
-        'publisher_id',
-        string="Publishers"
-    )    
+    publisher_ids = fields.Many2many('library.publisher', 'library_book_publisher_rel', 'book_id', 'publisher_id', string="Publishers")    
     
     loan_ids = fields.One2many('library.loan', 'book_id', string="Loans")
 
@@ -37,7 +31,7 @@ class LibraryBook(models.Model):
     def _check_(self):
         for record in self:
             if record.pages < 0:
-                raise ValidationError("页数不能为负数")
+                raise ValidationError("Page number cannot be negative")
 
     
             

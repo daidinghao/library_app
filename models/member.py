@@ -3,11 +3,11 @@ from odoo.exceptions import UserError, ValidationError
 
 class LibraryMember(models.Model):
     _name = 'library.member'
-    _description = '读者'
+    _description = 'Member'
     _order = 'name'
 
-    name = fields.Char(string="Member_Name", required=True)
-    loan_ids = fields.One2many('library.loan', 'member_id', string="Loans")
+    name = fields.Char(string="Reader_Name", required=True)
+    loan_ids = fields.One2many('library.loan', 'member_id', string="Record")
     loan_count = fields.Integer(string="Books Count", compute='_compute_loan_count', store=True)
     unreturned_count = fields.Integer(string="Unreturned Count", compute="_compute_unreturned_count", store=True)
 
